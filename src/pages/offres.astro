@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
-import maison_1 from "public/maison_1..jpg";
+import Cards from "../components/Cards.astro";
 const offres = [
     {
         adresse: "2821 Lake Sevilla, Palm Harbor, TX",
@@ -23,7 +23,7 @@ const offres = [
         nomMaison: "Palm Harbor",
         prix: 2095,
         surface: 42,
-        imgUrl: "public/maison_2.jpg",
+        imgUrl: "./maison_2.jpg",
     },
     {
         adresse: "909 Woodland St, Michigan, IN",
@@ -34,7 +34,7 @@ const offres = [
         nomMaison: "Faulkner Ave",
         prix: 4550,
         surface: 80,
-        imgUrl: "public/maison_3.jpg",
+        imgUrl: "./maison_3.jpg",
     },
 ];
 ---
@@ -50,26 +50,44 @@ const offres = [
     >
         Consultez nos différentes offres de logement.
     </p>
-    <div>
-        {
-            offres.map(
-                (offre) => (
-                    <ul>
-                        <li>{offre.nomMaison}</li>
-                        <li>{offre.adresse}</li>
-                        <li>{offre.prix} € / mois</li>
-                        <li>{offre.nbChambres} chambres</li>
-                        <li>{offre.nbSdb} salles de bain</li>
-                        <li>{offre.favori ? "❤️" : ""}</li>
-                        <li>{offre.surface} m²</li>
-                        <li>
-                            <img src={offre.imgUrl} alt={offre.imgUrl} />
-                        </li>
-                    </ul>
-                ),
-                // afficher les nom des maisons sous forme de liste <ul>.
-            )
-        }
-    </div>
+    <button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2">Afficher les favoris</button>
+<div>
+    {
+        offres.map(offre => (
+            <div class="offre" data-favori={offre.favori.toString()}>
+                <!-- Contenu de l'offre -->
+                  <Cards
+                        nomMaison={offre.nomMaison}
+                        imgUrl={offre.imgUrl}
+                        adresse={offre.adresse}
+                        prix={offre.prix}
+                        nbChambres={offre.nbChambres}
+                        nbSdb={offre.nbSdb}
+                        surface={offre.surface}
+                    />
+            </div>
+        ))
+    }
+</div>
+<script>
+    const button = document.getElementById('favori-button');
+    let showOnlyFavorites = false;
+    
+    button?.addEventListener('click', () => {
+        showOnlyFavorites = !showOnlyFavorites;
+        const offres = document.querySelectorAll('.offre');
+        
+        offres.forEach(offre => {
+            const isFavori = offre.dataset.favori === 'true';
+            
+            if (showOnlyFavorites) {
+                offre.style.display = isFavori ? 'block' : 'none';
+                button.textContent = 'Afficher tout';
+            } else {
+                offre.style.display = 'block';
+                button.textContent = 'Afficher les favoris';
+            }
+        });
+    });
+</script>
 </Layout>
-<Footer />

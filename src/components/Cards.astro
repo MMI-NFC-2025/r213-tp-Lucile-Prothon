@@ -1,0 +1,19 @@
+---
+const Offres = Astro.props;
+---
+
+<div class="card">
+    <h4><b>{Astro.props.nomMaison}</b></h4>
+    <img
+        src={Astro.props.imgUrl}
+        alt={Astro.props.nomMaison}
+        style="width:100%,"
+    />
+    <div class="container">
+        <p>{Astro.props.adresse}</p>
+        <p>Prix: {Astro.props.prix} € / mois</p>
+        <p>Chambres: {Astro.props.nbChambres}</p>
+        <p>Salles de bain: {Astro.props.nbSdb}</p>
+        <p>Surface: {Astro.props.surface} m²</p>
+    </div>
+</div>
