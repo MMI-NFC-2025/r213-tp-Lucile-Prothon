@@ -4,14 +4,17 @@ import PbImage from "./PbImage.astro";
 const offre = Astro.props.offre;
 ---
 
-<div class="card" style="background-color: rgb(233, 156, 156)" >
+<div
+    class="card"
+    style="background-color: rgb(156, 183, 233); border-radius: 15px; padding: 20px; margin: 70px "
+>
     <h4 style="margin: 20px;"><b>{offre.nom_maison}</b></h4>
     <PbImage record={offre} recordImage={offre.image[0]} />
     <div class="container">
-        <p>{offre.adresse}</p>
+        <p>Adresse : {offre.adresse}</p>
         <p>Prix: {offre.prix} € / mois</p>
-        <p>Chambres: {offre.nb_Chambres}</p>
-        <p>Salles de bain: {offre.nb_Sdb}</p>
+        <p>Chambres : {offre.nb_Chambres}</p>
+        <p>Salles de bain : {offre.nb_Sdb}</p>
         <p>Surface: {offre.surface} m²</p>
     </div>
 </div>

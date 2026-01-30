@@ -2,7 +2,7 @@
 import { getImageUrl } from "../js/backend.mjs";
 import { Image } from "astro:assets";
 
-const { record, recordImage } = Astro.props;
+const { record, recordImage, width = 700, height = 500 } = Astro.props;
 
 const imageURL = await getImageUrl(record, recordImage);
 ---
@@ -11,10 +11,9 @@ const imageURL = await getImageUrl(record, recordImage);
     imageURL && (
         <Image
             src={imageURL}
+            class="w-full h-auto max-h-64 object-contain mx-auto margin: 10px"
             alt={record.nom_maison || "Image"}
             inferSize={true}
         />
     )
 }
-
-
