@@ -16,7 +16,13 @@ const offre = Astro.props.offre;
         <p>Chambres : {offre.nb_Chambres}</p>
         <p>Salles de bain : {offre.nb_Sdb}</p>
         <p>Surface: {offre.surface} m²</p>
-        <a href={`/offres/${offre.id}`}>Voir plus</a>
+        <button
+            style="background-color: rgb(156, 183, 233); border: none; color: rgb(141, 71, 7); text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
+        >
+            <a
+                style="font-size: 18px; font-weight: 600;"
+                href={`/offres/${offre.id}`}>Voir plus</a
+            >
+        </button>
     </div>
-
 </div>

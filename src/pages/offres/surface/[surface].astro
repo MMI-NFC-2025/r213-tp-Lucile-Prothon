@@ -1,0 +1,15 @@
+---
+import { getSurface } from "../../../js/backend.mjs";
+import Layout from "../../../layouts/Layout.astro";
+
+const { surface } = Astro.params;
+const offre = await getSurface(surface);
+---
+
+<Layout titre={offre.nom_maison}>
+    <h2>{offre.nom_maison}</h2>
+    <ul>
+        <li>{offre.adresse}</li>
+        Voici les offres de logement avec une surface supérieur à {surface} m².
+    </ul>
+</Layout>
