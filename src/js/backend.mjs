@@ -20,7 +20,7 @@ export async function getImageUrl(record, recordImage) {
 
 export async function getOffre(id) {
     try {
-        const data = await db.collection('maison').getOne(id);
+        const data = await db.collection('Maison').getOne(id);
         return data;
     } catch (error) {
         console.log('Une erreur est survenue en lisant la maison', error);
@@ -30,12 +30,28 @@ export async function getOffre(id) {
 
 export async function getSurface(surface) {
     try {
-        const data = await db.collection('maison').getFullList({
+        const data = await db.collection('Maison').getFullList({
             filter: `surface = ${surface}`,
         });
         return data;
     } catch (error) {
         console.log('Une erreur est survenue en lisant la maison', error);
         return {};
+    }
+}
+
+export async function addOffre(house) {
+    try {
+        await db.collection('Maison').create(house);
+        return {
+            success: true,
+            message: 'Offre ajoutée avec succès'
+        };
+    } catch (error) {
+        console.log('Une erreur est survenue en ajoutant la maison', error);
+        return {
+            success: false,
+            message: 'Une erreur est survenue en ajoutant la maison'
+        };
     }
 }

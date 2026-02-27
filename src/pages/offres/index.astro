@@ -18,7 +18,15 @@ const offres = await getOffres();
     >
         Consultez nos différentes offres de logement.
     </p>
-    <button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2">Afficher les favoris</button>
+    <button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2" style="margin: 10px 20px;">Afficher les favoris</button>
+    <button
+    style="background-color:rgb(179, 230, 237); border: 1px solid rgb(155, 205, 235); text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 10px 20px; cursor: pointer;"
+>
+    <a style="font-size: 18px; font-weight: 600;" href={`/offres/add`}
+        >ajouter une annonce</a
+    >
+</button>
+
 <div>
     {
         offres.map(offre => (
