@@ -28,11 +28,52 @@ const agent = Astro.props.agent;
                     >
                         Voir plus
                     </a>
+                    <button
+                        class="favoriteButton absolute bottom-0 left-0 p-2 text-white rounded-br-lg"
+                        data-offre={JSON.stringify(offre)}
+                    >
+                        <img
+                            id="favorite-icon"
+                            src={
+                                offre.favori
+                                    ? "favorite_filled.png"
+                                    : "favorite.png"
+                            }
+                            alt="Favorite Icon"
+                            class="w-6 h-6"
+                        />
+                    </button>
                 </button>
             </div>
         </div>
     )
 }
+
+<script>
+    //@ts-nocheck
+    // chemin correct vers le module backend depuis components/
+    import { setFavori } from "../js/backend.mjs";
+    // cibler les boutons créés plus bas dans le DOM
+    const favoriteButtons = document.querySelectorAll(".favoriteButton");
+
+    favoriteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const offreData = JSON.parse(button.dataset.offre || "{}");
+            const newFavori = !offreData.favori;
+
+            setFavori(offreData);
+
+            const favIcon = button.querySelector("img");
+            if (favIcon) {
+                favIcon.src = newFavori
+                    ? "/favorite.png"
+                    : "/favorite_filled.png";
+            }
+            offreData.favori = newFavori;
+            button.dataset.offre = JSON.stringify(offreData);
+        });
+    });
+</script>
 
 {
     agent && (

@@ -90,3 +90,7 @@ export async function getAgent(id) {
         return {};
     }
 }
+
+export async function setFavori(house) {
+    await db.collection('maison').update(house.id, { favori: !house.favori });
+}
