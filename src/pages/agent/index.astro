@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import Cards from "../../components/Cards.astro";
+import { getAgents } from "../../js/backend.mjs";
+
+// récupérer la liste des agents au moment du build
+let agents = await getAgents();
+---
+
+<Layout titre="Agents">
+    <h1
+        style="color: rgb(63, 205, 231); font-weight: bold; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin: 10px;font-size: large;"
+    >
+        Agents immobiliers
+    </h1>
+    <p
+        style="margin: 10px; font-weight: 500; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
+    >
+        Consultez nos différentes agent immobilier.
+    </p>
+
+<div>
+    {
+        agents.map(agent => (
+            <div class="agent" data-favori={agent.favori?.toString() || 'false'}>
+                <!-- Contenu de l'agent -->
+                  <Cards
+                       agent={agent}
+                    />
+            </div>
+        ))
+    }
+</div>
+</Layout>
+

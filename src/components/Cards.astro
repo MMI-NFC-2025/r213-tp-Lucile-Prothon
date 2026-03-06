@@ -2,27 +2,62 @@
 import PbImage from "./PbImage.astro";
 
 const offre = Astro.props.offre;
+const agent = Astro.props.agent;
 ---
 
-<div
-    class="card"
-    style="background-color: rgb(156, 183, 233); border-radius: 15px; padding: 20px; margin: 70px "
->
-    <h4 style="margin: 20px;"><b>{offre.nom_maison}</b></h4>
-    <PbImage record={offre} recordImage={offre.image[0]} />
-    <div class="container">
-        <p>Adresse : {offre.adresse}</p>
-        <p>Prix: {offre.prix} € / mois</p>
-        <p>Chambres : {offre.nb_Chambres}</p>
-        <p>Salles de bain : {offre.nb_Sdb}</p>
-        <p>Surface: {offre.surface} m²</p>
-        <button
-            style="background-color: rgb(156, 183, 233); border: none; color: rgb(141, 71, 7); text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
+{
+    offre && (
+        <div
+            class="card"
+            style="background-color: rgb(156, 183, 233); border-radius: 15px; padding: 20px; margin: 70px "
         >
-            <a
-                style="font-size: 18px; font-weight: 600;"
-                href={`/offres/${offre.id}`}>Voir plus</a
-            >
-        </button>
-    </div>
-</div>
+            <h4 style="margin: 20px;">
+                <b>{offre.nom_maison}</b>
+            </h4>
+            <PbImage record={offre} recordImage={offre.image?.[0]} />
+            <div class="container">
+                <p>Adresse : {offre.adresse}</p>
+                <p>Prix: {offre.prix} € / mois</p>
+                <p>Chambres : {offre.nb_Chambres}</p>
+                <p>Salles de bain : {offre.nb_Sdb}</p>
+                <p>Surface: {offre.surface} m²</p>
+                <button style="background-color: rgb(156, 183, 233); border: none; color: rgb(141, 71, 7); text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                    <a
+                        style="font-size: 18px; font-weight: 600;"
+                        href={`/offres/${offre.id}`}
+                    >
+                        Voir plus
+                    </a>
+                </button>
+            </div>
+        </div>
+    )
+}
+
+{
+    agent && (
+        <div
+            class="card"
+            style="background-color: rgb(14, 171, 163); border-radius: 15px; padding: 20px; margin: 70px "
+        >
+            <h4 style="margin: 20px;">
+                <b>{agent.nom_maison}</b>
+            </h4>
+            <PbImage record={agent} recordImage={agent.image?.[0]} />
+            <div class="container">
+                <p>Nom : {agent.nom}</p>
+                <p>Prénom: {agent.prenom}</p>
+                <p>Contact: {agent.email}</p>
+
+                <button style="background-color: rgb(46, 132, 161); border: none; color: rgb(0, 0, 0); text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 7px 2px; cursor: pointer; border-radius: 10%;">
+                    <a
+                        style="font-size: 18px; font-weight: 600;"
+                        href={`/agent/${agent.id}`}
+                    >
+                        Voir plus
+                    </a>
+                </button>
+            </div>
+        </div>
+    )
+}

@@ -6,12 +6,13 @@ import { getOffres } from "../../js/backend.mjs";
 import { filterByPrix } from "../../js/backend.mjs";
 
 
-let Offres = [];
+let Offres: any[] = [];
 let message = '';
 if (Astro.request.method === "POST") {
     const data = await Astro.request.formData();
-    const minPrix = parseInt(data.get("minPrix"));
-    const maxPrix = parseInt(data.get("maxPrix"));
+    // les noms de champs dans le formulaire sont "minPrix" et "maxPrix"
+    const minPrix = parseInt((data.get("minPrix") as string) || "0");
+    const maxPrix = parseInt((data.get("maxPrix") as string) || "0");
 
     if (minPrix > 0 && maxPrix > 0 && maxPrix > minPrix) {
         Offres = await filterByPrix(minPrix, maxPrix);

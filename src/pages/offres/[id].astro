@@ -3,7 +3,8 @@ import { getOffre } from "../../js/backend.mjs";
 import Layout from "../../layouts/Layout.astro";
 
 const { id } = Astro.params;
-const offre = await getOffre(id);
+// on laisse le type libre pour que TS ne se plaigne pas des propriétés
+const offre: any = await getOffre(id);
 ---
 
 <Layout titre={offre.nom_maison}>
